@@ -50,3 +50,101 @@ function steps(n) {
 }
 
 console.log(steps(10));
+
+
+// 判断一个单词是否是回文
+function checkPalindrom(str) { 
+    return str == str.split('').reverse().join('');
+}
+
+
+// 去掉一组整型数组重复的值
+function unique (arr) {  
+    let hashTable = {};
+    let data = [];
+    for(let i=0,l=arr.length;i<l;i++) {
+        if(!hashTable[arr[i]]) {
+            hashTable[arr[i]] = true;
+        data.push(arr[i]);
+        }
+    }
+    return data
+}
+
+// 统计一个字符串出现最多的字母
+function findMaxDuplicateChar(str) {  
+    if(str.length == 1) {
+        return str;
+    }
+    let charObj = {};
+    for(let i=0;i<str.length;i++) {
+        if(!charObj[str.charAt(i)]) {
+            charObj[str.charAt(i)] = 1;
+        }else{
+            charObj[str.charAt(i)] += 1;
+        }
+    }
+    let maxChar = '',
+    maxValue = 1;
+    for(var k in charObj) {
+        if(charObj[k] >= maxValue) {
+            maxChar = k;
+            maxValue = charObj[k];
+        }
+    }
+    return maxChar;
+}
+
+// 找出下列正数组的最大差值
+function getMaxProfit(arr) {
+
+    var minPrice = arr[0];
+    var maxProfit = 0;
+
+    for (var i = 0; i < arr.length; i++) {
+        var currentPrice = arr[i];
+
+        minPrice = Math.min(minPrice, currentPrice);
+
+        var potentialProfit = currentPrice - minPrice;
+
+        maxProfit = Math.max(maxProfit, potentialProfit);
+    }
+
+    return maxProfit;
+}
+
+//随机生成指定长度的字符串
+function randomString(n) {  
+    let str = 'abcdefghijklmnopqrstuvwxyz9876543210';
+    let tmp = '',
+        i = 0,
+        l = str.length;
+    for (i = 0; i < n; i++) {
+      tmp += str.charAt(Math.floor(Math.random() * l));
+    }
+    return tmp;
+}
+
+// 实现类似getElementsByClassName
+function queryClassName(node, name) {  
+    var starts = '(^|[ \n\r\t\f])',
+         ends = '([ \n\r\t\f]|$)';
+    var array = [],
+    regex = new RegExp(starts + name + ends),
+    elements = node.getElementsByTagName("*"),
+    length = elements.length,
+    i = 0,
+    element;
+  
+    while (i < length) {
+        element = elements[i];
+        if (regex.test(element.className)) {
+            array.push(element);
+        }
+
+        i += 1;
+    }
+
+    return array;
+}
