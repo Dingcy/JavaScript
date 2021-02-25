@@ -8,8 +8,7 @@ console.log(Function.prototype.__proto__.__proto__)
 
 const Instanceof = (A,B) => {
     let p = A;
-
-    while(p){
+    while (p) {
         if(p === B.prototype){
             return true
         }
