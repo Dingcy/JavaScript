@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .id1 {
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+      }
+      .id2 {
+        width: 200px;
+        height: 200px;
+        background-color: seagreen;
+      }
+      .id3 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="id1" class="id1">
+      id1
+      <div id="id2" class="id2">
+        id2
+        <div id="id3" class="id3">id3</div>
+      </div>
+    </div>
+
+    <script>
+      var box1 = document.getElementById("id1");
+      var box2 = document.getElementById("id2");
+      var box3 = document.getElementById("id3");
+
+    //   box1.onclick = function () {
+    //     console.log("box1");
+    //   };
+    //   box2.onclick = function () {
+    //     console.log("box2");
+    //   };
+    //   box3.onclick = function () {
+    //     console.log("box3");
+    //   };
+
+        box1.addEventListener('click', function(){
+        console.log('box1');
+    },true);
+    box2.addEventListener('click', function(){
+        console.log('box2');
+    },true);
+    box3.addEventListener('click', function(){
+        console.log('box3');
+    },true);
+
+
+    </script>
+
+    <!-- 
+        1.事件是如何实现的 
+        
+        基于发布订阅模式，就是在浏览器加载的时候会读取事件相关的代码，但是只有实际等到具体的事件触发的时候才会执行。
+
+        比如点击按钮，这是个事件（Event），而负责处理事件的代码段通常被称为事件处理程序（Event Handler），也就是「启动对话框的显示」这个动作。
+
+        在 Web 端，我们常见的就是 DOM 事件：
+
+        DOM0 级事件，直接在 html 元素上绑定 on-event，比如 onclick，取消的话，dom.onclick = null，同一个事件只能有一个处理程序，后面的会覆盖前面的。
+        DOM2 级事件，通过 addEventListener 注册事件，通过 removeEventListener 来删除事件，一个事件可以有多个事件处理程序，按顺序执行，捕获事件和冒泡事件
+        DOM3级事件，增加了事件类型，比如 UI 事件，焦点事件，鼠标事件
+    -->
+
+    <!-- 2.事件流 -->
+    <!-- 
+        1.事件流分为三个阶段：捕获阶段 目标阶段 冒泡阶段
+        2.Dom0事件只有捕获阶段
+     -->
+     <!-- 
+           文章 https://juejin.cn/post/6844903741783556109
+      -->
+  </body>
+</html>
