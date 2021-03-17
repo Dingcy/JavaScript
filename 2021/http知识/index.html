@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+
+
+
+        http2:
+        优势： 多路复用，流优先级，头部压缩，服务端推送
+
+        http1:
+        缺点：
+            对头阻塞，虽然可以发送多个请求，但是请求之间是有顺序的，必须处理完第一个请求才会响应下一个请求，如果第一个请求特别慢，下一个请求必须排队
+            Tcp连接数限制  同一个域名，最多同时创建6-8个tcp链接  域名分片技术：把资源分配到不同的域名下（可以是二级子域名）。但是每个tcp连接依旧很耗时
+            header内容繁多，有时候可能会超过响应的内容，并且每次有很多字段都是重复传输
+            文本协议传输，不够安全
+
+        https;
+        
+        
+</body>
+</html>
