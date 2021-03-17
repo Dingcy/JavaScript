@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>compose</title>
+</head>
+
+<body>
+    <script>
+        function add1(x) {
+            return x + 1
+        }
+        function mult3(y) {
+            return y * 3
+        }
+
+        // function compose(f,g) {
+        //     return function (x) {
+        //         return f(g(x))
+        //     }
+        // }
+
+        // 1递归
+
+        // function compose(...funs) {
+        //     let count  = funs.length-1;
+        //     let fn = funs[0];
+
+        //     while(count){
+        //         fn = funs[count--]
+                
+        //     }
+
+        // }
+
+        // 2迭代
+
+        // function compose(...funs) {
+        //         const callback = function(f,g){
+        //             return function (x) {
+        //                 return f(g(x))
+        //             }
+        //         }
+
+        //         let fn = funs[0];
+
+        //         for (let i = 1; i < funs.length; i++) {
+        //             fn = callback(fn,funs[i])
+        //         }
+
+        //         return fn
+
+        //     }
+        // 3 reduce
+        function compose(...funs) {
+            if (funs.length === 0) {
+                return args => args
+            }
+
+            if (funs.length === 1) {
+                return funs[0]
+            }
+
+            return funs.reduce((a, b) => (...args) => a(b(...args)))
+        }
+
+        console.log(compose(mult3, add1)(1))
+    </script>
+</body>
+
+</html>
