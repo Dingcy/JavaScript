@@ -25,49 +25,68 @@
 
         // 1递归
 
-        // function compose(...funs) {
-        //     let count  = funs.length-1;
-        //     let fn = funs[0];
+        function compose(...funs) {
+            let count  = funs.length-1;
+            let fn = funs[0];
 
-        //     while(count){
-        //         fn = funs[count--]
-                
-        //     }
-
-        // }
+            return function (x) {
+                while(count){
+                    fn = funs[count--]
+                    
+                }
+            }
+        }
 
         // 2迭代
 
-        // function compose(...funs) {
-        //         const callback = function(f,g){
-        //             return function (x) {
-        //                 return f(g(x))
-        //             }
-        //         }
-
-        //         let fn = funs[0];
-
-        //         for (let i = 1; i < funs.length; i++) {
-        //             fn = callback(fn,funs[i])
-        //         }
-
-        //         return fn
-
-        //     }
-        // 3 reduce
         function compose(...funs) {
-            if (funs.length === 0) {
-                return args => args
-            }
+                const callback = function(f,g){
+                    return function (x) {
+                        return f(g(x))
+                    }
+                }
 
-            if (funs.length === 1) {
+                let fn = funs[0];
+
+                for (let i = 1; i < funs.length; i++) {
+                    fn = callback(fn,funs[i])
+                }
+
+                return fn
+
+            }
+        // 3 reduce
+        // function compose(...funs) {
+        //     if (funs.length === 0) {
+        //         return args => args
+        //     }
+
+        //     if (funs.length === 1) {
+        //         return funs[0]
+        //     }
+
+        //     return funs.reduce((a, b) => (...args) => a(b(...args)))
+        // }
+
+        function compose(...funs) {
+            if(funs.length === 0){
+                return arg => arg
+            } 
+            if(funs.length === 1){
                 return funs[0]
             }
 
-            return funs.reduce((a, b) => (...args) => a(b(...args)))
+            return funs.reduce((acc,fn) => args => acc(fn(args)))
         }
+        // compose执行顺序  从右往左
 
-        console.log(compose(mult3, add1)(1))
+        // pipe
+        // pipe  执行顺序：从左往右
+        const pipe = (...fns) => (val) => fns.reduce((acc,fn) => fn(acc),val)
+
+
+        console.log(compose(1))
+        console.log(pipe(mult3, add1)(1))
     </script>
 </body>
 
