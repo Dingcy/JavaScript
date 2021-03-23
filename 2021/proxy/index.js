@@ -31,7 +31,7 @@
 // console.log(proxy.name);
 // proxy.name = 'tes'
 
-
+// 冻结属性
 function freeze (obj) {
     return new Proxy(obj, {
       set () { return true; },
@@ -46,5 +46,28 @@ let frozen = freeze([1,2,3]);
 frozen[0] = 6;
 delete frozen[0];
 frozen = Object.defineProperty(frozen, 0, { value: 66 });
-console.log(frozen);
+console.log(frozen);//[1,2,3]
+
+
+// 隐藏属性
+// 验证是否合法
+// 增强型对象
+// 增强性数组
+
+
+// proxy中this指向问题
+
+const target = {
+    foo() {
+      return {
+        thisIsTarget: this === target,
+        thisIsProxy: this === proxy,
+      };
+    },
+  };
+  
+  const handler = {};
+  const proxy = new Proxy(target, handler);
+  console.log(target.foo()); // { thisIsTarget: true, thisIsProxy: false }
+  console.log(proxy.foo());
 
