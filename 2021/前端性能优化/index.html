@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+
+        性能优化：
+        1：首屏时间   
+        2：首次可交互时间
+        3：首次有意义内容渲染时间
+        
+
+        1:只请求当前需要的资源
+            异步加载  懒加载 polyfill  
+            
+        2：缩减资源体积
+            打包压缩 webpack4/5 
+            gzip
+            图片格式优化  压缩 webp
+            尽量控制ccokie 的大小
+
+        3.时序优化
+            js  promise.all
+            ssr  打包放在了服务端，可以做缓存，方便seo
+            prefetch prerender preloader 
+            <link rel="dns-prefetch" href="//xxx.com">   dns预解析
+            <link rel="dns-prefetch" href="//xxx2.com"> 
+            预连接  浏览器能够预先建立一个连接
+            <link rel="preconnect" href="//example.com">
+            <link rel="preconnect" href="//cdn.example.com" crossorigin>  
+            能够让浏览器预加载一个资源（HTML，JS，CSS或者图片等），可以让用户跳转到其他页面时，响应速度更快。
+            <link rel="prefetch" href="//example.com/next-page.html" as="html" crossorigin="use-credentials">
+            <link rel="prefetch" href="/library.js" as="script">   
+            而prerender不仅会加载资源，还会解执行页面，进行预渲染
+            <link rel="prerender" href="//example.com/next-page.html">
+        
+        4.合理利用缓存
+            cdn  cdn预热  cdn刷新    
+
+        
+
+        如果一段js 执行时间非常长，怎么分析？
+
+        
+     -->
+</body>
+</html>
