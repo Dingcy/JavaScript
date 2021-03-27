@@ -1,25 +1,28 @@
 function promiseLimit(urls,handler,max) {
-    let sequence = [].concat(urls)
-    // 截取max个url,此时sequence只剩下urls.length - max个
+    let sequence = [].concat(urls);//复制urls数组
+    // 截取max个url供第一次使用
     let promises = sequence.splice(0,max).map((url,index) => {
         return handler(url).then(() => {
-            return index  //执行完成后返回索引
+            return index  //执行完毕返回索引
         })
-    });
+    })
 
-    let p = Promise.race(promises);
-    // 此时的sequence只剩下urls.length - max
+    let p = Promise.race(promises);//第一次同时开启max个请求；
+
+    // 循环sequence,此时sequence只剩下urls.length - max个
     for (let i = 0; i < sequence.length; i++) {
-        p = p.then(res => {
-            // 一个执行完毕再推入新的请求并返回索引
-            promises[res] = handler(sequence[i]).then(()=> {
+       p = p.then(res => {
+        //    此时res为index
+            promises[res] = handler(sequence[i]).then(() => {
                 return res
             });
-            return Promise.race(promises)  //继续返回promise.race  链式调用
-        })
-    }
 
+            return Promise.race(promises)  //继续返回promise.race供链式调用
+       })
+        
+    }
 }
+
 
 const urls = [{
     info:'1',
