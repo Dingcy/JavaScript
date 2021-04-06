@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="value">
+        <input type="text" v-model="value">
+        <p v-text="value"></p>
+    </div>
+    <script>
+        // 发布
+        function Subject(){
+            this.observers = [];
+            this.attach = function(callback){
+                this.observers.push(callback)
+            }
+            this.notify = (value) => {
+                this.observers.forEach(callback => {
+                    callback(value)
+                })
+            }
+        }
+        // 订阅
+        function Observer(queue,key,callback){
+            queue[key].attach(callback)
+        }
+        // 数据监听 proxy代理
+        function ProxyWatcher(data,queue){
+            return new Proxy(data,{
+                get:function(target,key){
+                    return target[key]
+                },
+                set:function(target,key,value){
+                    target[key] = value;
+                    // 通知发生改变
+                    queue[key].notify(value)
+                }
+            })
+        }
+
+        // 模板解析
+        function compile(el,data) {
+            if(el.attributes){
+                [].forEach.call(el.attributes,attribute => {
+                    if(attribute.name.includes('v-')){
+                        update[attribute.name](el,data,attribute.value)
+                    }
+                })
+            }
+
+            [].forEach.call(el.childNodes,child => {
+                compile(child,data)
+            })
+        }
+
+        const update = {
+            'v-text':function(el,data,key){
+              el.innerText = data[key];
+            //   创建数据的订阅，数据更新后更新视图
+            Observer(msgQueue,key,(res) => {
+                el.innerText = res;
+            })
+            },
+            'v-model':function(el,data,key){
+                el.value = data[key];
+
+                el.addEventListener('keyup', e => {
+                    data[key] = e.target.value;
+                })
+
+                //   创建数据的订阅，数据更新后更新视图
+                Observer(msgQueue,key,(res) => {
+                    el.value = res;
+                })
+            }
+        }
+
+        const msgQueue = {};
+        const myData = ProxyWatcher({value:''},msgQueue);
+        for (const key in myData) {
+            msgQueue[key] = new Subject()
+        }
+
+        // Observer(msgQueue,'value',(value) => {
+        //     console.log('value change',value)
+        // })
+
+        // myData.value = 'hello word'
+        // myData.value = 100
+        // myData.value = true
+
+        compile(document.querySelector('#app'),myData)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        前端安全：
+        1：XSS（跨站脚本攻击）  攻击者通过注入非法html标签或者javascript代码，控制用户浏览器
+            DOM xss  dom标签
+            反射性xss  xss代码出现在URL中
+            存储型xss   表单 评论 留言板
+
+
+            防御办法：httponly  过滤（输入检查,htmlEncode，JavaScriptEncode）
+
+        2.csrf(跨站请求伪造)  利用http请求会自动携带cookie  冒充用户发起请求
+            防御：
+                token  使用post而非get  验证码  
+
+            点击劫持：透明的Iframe覆盖在页面上面   
+                防御： x-frame-options: DENY  禁止嵌套iframe  js控制非同域跳转（意义不大）  
+     -->
+</body>
+</html>
