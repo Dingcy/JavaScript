@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 讲虚拟dom转换为真实dom
+        function render(vnode,container) {
+            container.appendChild(_render(vnode));
+        }
+
+        // vnode 的结构：{ tag, attrs, children, ... }
+        function _render(vnode) {
+            // 如果是数组就转换为字符串
+            if(typeof vnode === 'number') vnode = String(vnode);
+            // 如果是字符串就转换为文本
+            if(typeof vnode === 'string') return document.createTextNode(vnode);
+            // 普通dom
+            const dom = document.createElement(vnode.tag);
+            if(vnode.attrs){
+                    Object.keys(vnode.attrs).forEach(key => {
+                        let value = vnode.attrs[key];
+                        dom.setAttribute(key,value);
+                    })
+            }
+            //递归
+            if(vnode.children) vnode.children.forEach(child => render(child,dom));
+
+            return dom
+        }
+    </script>
+</body>
+</html>

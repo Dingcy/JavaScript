@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="value">
+        <input type="text" v-model="value">
+        <p v-text="value"></p>
+    </div>
+
+    <script>
+        // 发布
+        function Subject() {
+            this.observers = [];
+            this.attach = function (callback) {
+                this.observers.push(callback)
+            };
+            this.notify = function (value) {
+                this.observers.forEach(callback => callback(value))
+            }
+        }
+
+        // 订阅
+        function Observer(queue,key,callback) {
+            queue[key].attach(callback)
+        }
+
+
+        //数据劫持  proxy 代理
+        function ProxyWatcher(data,queue) {
+            return new Proxy(data,{
+                get:function(target,key){
+                    return target[key]
+                },
+                set:function(target,key,value){
+                    target[key] = value;
+                    queue[key].notify(value);
+                }
+            })
+        }
+
+        //  编译
+        function compile(el,data) {
+            if(el.attributes){
+                [].forEach.call(el.attributes,attribute => {
+                    if(attribute.name.includes('v-')){
+                        update[attribute.name](el,data,attribute.value)
+                    }
+                })
+            }
+
+            if(el.childNodes){
+                [].forEach.call(el.childNodes,child=> compile(child,data))
+            }
+        }
+
+        const update = {
+            'v-model':function(input,data,key){
+                input.value = data[key];
+
+                input.addEventListener('keyup',e => {
+                    data[key] = e.target.value;
+                })
+
+                Observer(queue,key,value => {
+                    input.value = value;
+                })
+            },
+            'v-text':function(el,data,key){
+                el.innerText = data[key];
+
+                Observer(queue,key,value => {
+                    el.innerText = value;
+                })
+            }
+        }
+
+        const queue = {};
+        const myData = ProxyWatcher({value:''},queue);
+        for (const key in myData) {
+            queue[key] = new Subject()
+        }
+
+        // Observer(queue,'value',value => {
+        //     console.log('value change',value);
+        // })
+
+        // myData.value = 'hello word';
+        // myData.value = 100;
+        // myData.value = true;
+
+        compile(document.querySelector('#app'),myData);
+        
+    </script>
+</body>
+</html>
