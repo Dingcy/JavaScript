@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        babel es6转为es5
+        转换过程：
+        1.parser 解析
+            将es6代码转为AST抽象语法树，也就是将代码打散成颗粒组装的对象，这一步主要是通过babylon完成
+        2.transform 转换
+            将已经打散的AST语法树通过plugins和presets转换为新的AST语法树，主要是babel-transform插件完成
+        3.generator 生成
+            将新的AST语法树生成ES5浏览器可识别的语法，主要是babel-generator生成
+     -->
+
+     <!-- 
+         tree shaking 原理
+         1.ES6 Module 引入了静态分析，所以编译的时候能准确知道引入了哪些模块
+         2.静态分析程序流，判断哪些模块和变量未被使用或者引用，进而删除无用代码
+      -->
+
+      <!-- 
+          commonjs  vs   es6 module
+          1.commonjs 是值的拷贝，es6输出是值的引用
+          2.commonjs运行时加载 ，es6是是编译时输出接口
+          3.commonjs 输出的是单个值，es6可以输出多个值
+          4.commonsj  this 指向模块本身，es6this指向undefined
+            5.commonjs是动态语法可以写在判断里，es6静态语法只能写在顶层
+       -->
+</body>
+</html>
