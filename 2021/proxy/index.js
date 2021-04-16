@@ -71,3 +71,9 @@ const target = {
   console.log(target.foo()); // { thisIsTarget: true, thisIsProxy: false }
   console.log(proxy.foo());
 
+
+  // proxy 相对于 defineProperty
+  // proxy 监听的是对象  defineProperty监听的对象的属性
+  // proxy 可以监听数组的下标变化以及对象的原型变化
+  // proxy  性能更好，更节省内存
+

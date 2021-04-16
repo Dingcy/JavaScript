@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="model">
+    <p id="word"></p>
+
+    <script>
+        let model = document.querySelector('#model');
+        let word = document.querySelector('#word');
+
+        let obj = {};
+        const newObj = new Proxy(obj,{
+            get:function(target,key,receiver){
+                console.log('value get');
+                return Reflect.get(target,key,receiver)
+            },
+            set:function(target,key,value,receiver){
+                console.log('set value');
+                if(key === 'text'){
+                    model.value = value;
+                    word.innerHTML = value;
+                }
+                return  Reflect.set(target,key,receiver)
+            }
+        })
+
+        model.addEventListener('keyup',e=> {
+            newObj.text = e.target.value;
+        })
+
+
+    </script>
+</body>
+</html>
