@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "fe-deploy-cli": "^1.0.2"
+    "frend-deploy-cli": "^1.0.0"
   }
 }

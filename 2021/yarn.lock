@@ -487,20 +487,6 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
-fe-deploy-cli@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/fe-deploy-cli/-/fe-deploy-cli-1.0.2.tgz#5649a676dcf73ee51d8ec2f0fa4b68ad92b6e420"
-  integrity sha512-hRIitY7larBTxNlOTNnDuKY2DtRkfKo6Y96tempjX87nxC5SX3CYoAiMCowXFX7n+Uw1L9h47wtQooqcWuIyeQ==
-  dependencies:
-    archiver "^3.1.1"
-    chalk "^3.0.0"
-    commander "^4.1.0"
-    download-git-repo "^3.0.2"
-    inquirer "^7.0.3"
-    node-ssh "^7.0.0"
-    ora "^4.0.3"
-    semver "^7.1.1"
-
 figures@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-3.2.0.tgz#625c18bd293c604dc4a8ddb2febf0c88341746af"
@@ -546,6 +532,20 @@ filenamify@^2.0.0:
     filename-reserved-regex "^2.0.0"
     strip-outer "^1.0.0"
     trim-repeated "^1.0.0"
+
+frend-deploy-cli@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/frend-deploy-cli/-/frend-deploy-cli-1.0.0.tgz#6480092c9eab9bda391487bd76490af926ee0987"
+  integrity sha512-GeZLWBQECJmCYG0E3Bydt0RkTtz23vjt9tEI7JoPAIO32ZF09Jza9ZSkSprgZWVu15aSvqd7xvqAGnq7Wp+HFg==
+  dependencies:
+    archiver "^3.1.1"
+    chalk "^3.0.0"
+    commander "^4.1.0"
+    download-git-repo "^3.0.2"
+    inquirer "^7.0.3"
+    node-ssh "^7.0.0"
+    ora "^4.0.3"
+    semver "^7.1.1"
 
 from2@^2.1.1:
   version "2.3.0"
