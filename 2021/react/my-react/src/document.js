@@ -17,3 +17,9 @@
 // 跨平台渲染  => 虚拟dom
 // 快速响应 => 异步可中断+增量更新
 
+
+// redux Vs  mbox
+
+// redux 基于函数式编程  单一store  store以js原生对象存储  状态通常是不可改变的   react-redux(provider和connect)
+// mbox 基于面向对象编程  多个store  store以可观察对象存储  Mobx中可以直接使用新值更新状态对象  mbox-react(provider和inject)
+
