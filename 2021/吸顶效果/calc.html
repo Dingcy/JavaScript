@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .header {
+        height: 30px;
+        background: blue;
+      }
+      .container {
+        height: calc(100vh - 30px);
+        background: red;
+        overflow: scroll;
+      }
+
+      .header2 {
+        height: 30px;
+        background: blue;
+        position: sticky;
+        top: 0;
+      }
+      .container2 {
+        height: calc(100vh - 30px);
+        background: red;
+        overflow: scroll;
+      }
+
+
+      .header3 {
+        height: 30px;
+        background: blue;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left:0;
+      }
+      .container3 {
+        height: 100%;
+        padding-top: 30px;
+        box-sizing: border-box;
+        background: red;
+        overflow: scroll;
+      }
+      .wrap {
+        position: relative;
+        width: 100%;
+        max-height: 100vh;
+      }
+
+
+      body {
+        max-height: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      1.纯js实现
+      2.fixed实现
+      3.sticky实现
+      4.calc + 定高实现
+      5.absolute + box-sizing:border-box 
+     -->
+
+    <!-- 3.clac实现 -->
+    <!-- <div class="header"></div>
+      <div class="container">
+        <div style="width: 100%;height: 3000px;">
+            tetetetett
+        </div>
+      </div> -->
+
+    <!-- 4.position sticky -->
+    <!-- <div class="header2"></div>
+    <div class="container2">
+      <div style="width: 100%; height: 3000px">tetetetett</div>
+    </div> -->
+
+
+    <!-- 5.absolute + box-sizing:border-box -->
+    <div class="wrap">
+      <div class="header3"></div>
+      <div class="container3">
+        <div style="width: 100%; height: 3000px">tetetetett</div>
+      </div>
+    </div>
+   
+
+  </body>
+</html>

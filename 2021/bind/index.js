@@ -24,10 +24,39 @@ Function.prototype.myBind = function(){
 }
 
 
-function myBind2(fn,obj,...args) {
-    
-    return function (...args2) {
-        
-        return fn.call(obj,...args,...args2)
+Function.prototype.myBind2 = function () {
+    if(typeof this !== 'function') throw 'need a function'
+    let self = this;
+    let context = arguments[0];
+    let fn_args = Array.prototype.slice.call(arguments,1);
+
+    let fn = function () {
+        let bindArgs = Array.prototype.slice.call(arguments);
+
+        return self.apply(context,fn_args.concat(bindArgs));
     }
+
+    fn.prototype = Object.create(self.prototype);
+
+    return fn
+
 }
+
+
+// function myBind2(fn,obj,...args) {
+    
+//     return function (...args2) {
+        
+//         return fn.call(obj,...args,...args2)
+//     }
+// }
+
+function log() {
+    console.log(this.name)
+}
+
+const obj = {
+    name:'test'
+}
+
+log.myBind2(obj)()

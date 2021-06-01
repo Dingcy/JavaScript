@@ -8,3 +8,24 @@ function myNew(Fn,...args) {
     // 4.执行构造函数内部的代码，给新对象添加属性，并返回
     return  result instanceof Object?result:obj;  //构造函数内部返回的是对象就直接返回，如果返回的不是对象则返回新对象本身
 }
+
+
+
+
+
+
+
+function myNew2(Fn,...args) {
+    let obj = {};
+    let result = Fn.call(obj,...args);
+    obj.__proto__ = Fn.prototype;
+    return result instanceof Object?result:obj;
+}
+
+function Parent(name,age) {
+    this.name = name;
+    this.age = age;
+}
+
+// console.log(new Parent('tes',16));
+console.log(myNew2(Parent,'test',16));
