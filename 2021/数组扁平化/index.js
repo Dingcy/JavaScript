@@ -36,7 +36,25 @@ function flatterArray3(arr) {
     
  }
 
-// console.log(flatterArray3([1,2,3,[4,[5,6]]]))
+ function flatterArray4(arr) {
+    return  arr.reduce((prev,next) => {
+        if(Array.isArray(next)){
+           next =  flatterArray4(next)
+        }
+        return prev.concat(next);
+     },[])
+ }
+
+ function flatterArray5(arr) {
+     let result = arr;
+   while (result.some(item => Array.isArray(item))) {
+       result =  [].concat(...result)
+   }
+
+   return result
+ }
+
+console.log(flatterArray5([1,2,3,[4,[5,6]]]))
 
 // 数组分块
 let arr = [1,2,3,4,5,6,7];
@@ -57,4 +75,4 @@ function chunk(arr,size) {
     return result
 }
 
-console.log(chunk(arr,3))
+// console.log(chunk(arr,3))

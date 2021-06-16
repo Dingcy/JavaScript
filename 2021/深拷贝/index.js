@@ -13,7 +13,7 @@ function DFSDeepClone(obj,visited=new Set(),level=0) {
         if(visited.has(obj)){
             res = obj
         }else {
-            visited[level] = obj;
+            // visited[level] = obj;
             visited.add(obj);
             res = type === 'Object'?{}:[];
             Object.keys(obj).forEach(ele => {
@@ -27,6 +27,31 @@ function DFSDeepClone(obj,visited=new Set(),level=0) {
     }
 
     return res
+}
+
+const getType3 = (obj) => Object.prototype.toString.call(obj).slice(8,-1);
+
+function deepClone3(obj,visited = new Set(),level = 0) {
+  const type = getType3(obj);
+  let res = {};
+  if(type == 'Object' || type == 'Array'){
+    if(visited.has(obj)){
+      res = obj
+    }else {
+      visited.add(obj);
+      res = Array.isArray(obj)?[]:{};
+      Object.keys(obj).forEach(key => {
+        res[key] = deepClone3(obj[key],visited,level+1)
+      })
+    }
+      
+  }else if(type == 'Function'){
+    res = eval(`(${obj.toString()})`)
+  }else {
+    res = obj
+  }
+
+  return res
 }
 
 // 模拟环状数据
@@ -48,19 +73,47 @@ const obj_huan = {
 //   console.log(JSON.parse(JSON.stringify(obj_huan)))
 
 
-// let obj = {
-//     a:1,
-//     b:2,
-//     c:function () {
-//         console.log('111')
-//     },
-//     d:undefined,
-//     e:{
-//         name:'test'
-//     },
-//     f:/\d/
-// }
-console.log(DFSDeepClone(obj_huan))
+let obj = {
+    a:1,
+    b:{
+      b1:2
+    },
+    c:function () {
+        console.log('111')
+    },
+    d:undefined,
+    e:{
+        name:'test'
+    },
+    f:/\d/
+}
+
+const getType2 = (obj) =>  Object.prototype.toString.call(obj).slice(8,-1);
+function deepClone2(obj,map = new Set(),level = 0) {
+  let res = {};
+  const type = getType2(obj);
+
+  if(type == 'Object' || type == 'Array'){
+    if(map.has(obj)){
+      res = obj;
+    }else {
+      map.add(obj);
+      res = type == 'Object'?{}:[]
+        Object.keys(obj).forEach(key => {
+          res[key] = deepClone2(obj[key],map,level+1)
+        })
+    }
+  }else if(type == 'Function'){
+    res = eval(`(${obj.toString()})`)
+  }else {
+    res = obj
+  }
+
+  return res
+}
+
+
+console.log(deepClone3(obj))
 
 
 

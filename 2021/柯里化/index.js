@@ -13,7 +13,19 @@ function curry(fn, args=[]) {
     }
 }
 
+function curry3(fn,args=[]) {
+    return function () {
+        let newArgs = args.concat(Array.prototype.slice.call(arguments));
+        if(newArgs.length < fn.length){
+            return curry.call(this,fn,newArgs)
+        }else {
+            return fn.apply(this,newArgs)
+        }
+    }
+}
+
 
 let res = curry(add)(1,2)(3,4,5)
+let res2 = curry3(add)(1,2,3,4)(5)
 
-console.log(res)
+console.log(res,res2)

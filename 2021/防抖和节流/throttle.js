@@ -27,3 +27,15 @@ function throttle(fn,delay) {
         }
     }
 }
+
+
+function throllte(fn,delay) {
+    let prev = Date.now();
+    return function (...args) {
+        let cur = Date.now();
+        if(cur - prev > delay){
+            fn.apply(this,args);
+            prev = Date.now()
+        }
+    }
+}
